@@ -4,7 +4,7 @@ import pandas as pd
 from io import StringIO
 
 def transform(path):
-    with open("/home/xjm/go/src/xiaochi_coding/static/ChiBioTools/data/kegg/ko_index.json", "r") as f:
+    with open("./ko_index.json", "r") as f:
         json_dict = json.load(f)
 
     ko_info_strIO = StringIO()
@@ -43,7 +43,7 @@ def transform(path):
 
 def transform2(path):
     """level3 id以逗号隔开"""
-    with open("/home/xjm/go/src/xiaochi_coding/static/ChiBioTools/data/kegg/ko_index.json", "r") as f:
+    with open("./ko_index.json", "r") as f:
         json_dict = json.load(f)
 
     ko_info_strIO = StringIO()
@@ -73,7 +73,7 @@ def transform2(path):
 
 
 if __name__ == '__main__':
-    usage = "python %prog -f/--forward <forward fasta file> -r/--reverse <reverse fasta file> -o/--out <output assembly file>"
+    usage = "python %prog -f/--filePath <ko list file>"
     parser = optparse.OptionParser(usage,description="Example: python %prog -f forward.fasta -r reverse.fasta -o assembly.fasta")  ## 写入上面定义的帮助信息
     parser.add_option('-f', '--filePath', dest='filePath', type='string', help='File path tsv file')
     options, args = parser.parse_args()
