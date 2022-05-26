@@ -28,17 +28,9 @@ def transform(path):
         # print(ko_info_strIO.getvalue())
         # 把读写位置恢复到起始，因为每次write后读写位置都在末尾，这样pandas读不到东西
         ko_info_strIO.seek(0)
-        df = pd.read_table(ko_info_strIO)
-        counts = df["level2_pathway_name"].value_counts()
-        counts.name = "count"
-        counts.index.name = "level2_pathway_name"
-        res_json_dict = {
-            "query_count":df.shape[0],
-            "annotated_count":df.shape[0]-int(df["query_ko"].isnull().sum()),
-            "level2_pathway_count_tsv":counts.to_csv(sep="\t"),
-            "ko_info_tsv":ko_info_strIO.getvalue()
-        }
-        print(json.dumps(res_json_dict))
+        with open("./pathwayInfo.tsv","w") as f:
+            f.write(ko_info_strIO.getvalue())
+        
 
 
 def transform2(path):
